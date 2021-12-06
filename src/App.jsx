@@ -4,21 +4,34 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import { Provider } from 'react-redux'
+import { applyMiddleware, compose, createStore } from "redux";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import reducers from "./redux/reducers";
+import ReduxThunk from 'redux-thunk'
+import Verify from "./pages/Verify";
 
+const composeEnhancers =
+  typeof window === 'object' &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+    }) : compose; 
+const enhancer = composeEnhancers(applyMiddleware(ReduxThunk))
+
+const store = createStore(reducers, enhancer);
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path = '/register'>
-          <Register />
-        </Route>
-        <Route path = '/login'>
-          <Login />
-        </Route>
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route path='/register' component = {Register} />
+          <Route path='/login' component = {Login} />
+          <Route path='/verify' component = {Verify} />
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 
