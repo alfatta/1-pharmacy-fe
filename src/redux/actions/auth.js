@@ -3,6 +3,12 @@ import { API_URL } from "../../constants/api";
 
 Axios.defaults.baseURL = API_URL
 
+Axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) config.headers.token = token;
+  return config
+})
+
 export const setLogin = (role, token, user) => ({
   type: 'SET_LOGIN',
   payload: { role, token, user }
@@ -37,13 +43,13 @@ export const doLogin = (email, password, cb = () => {}) => {
 
 export const doLogout = (cb = () => {}) => {
   return (dispatch) => {
-    // logout()
-    //   .then((res) => {
-    //     dispatch(setLogout())
-    //     cb(null, res.data)
-    //   })
-    //   .catch((err) => {
-    //     cb(err)
-    //   })
+    Axios.post('/api/tes/auth/logout')
+      .then((res) => {
+        dispatch(setLogout())
+        cb(null, res.data)
+      })
+      .catch((err) => {
+        cb(err)
+      })
   }
 }

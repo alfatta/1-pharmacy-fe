@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import reducers from "./redux/reducers";
 import ReduxThunk from 'redux-thunk'
 import Verify from "./pages/Verify";
+import Home from "./pages/Home";
 
 const composeEnhancers =
   typeof window === 'object' &&
@@ -29,6 +30,7 @@ function App() {
           <Route path='/register' component = {Register} />
           <Route path='/login' component = {Login} />
           <Route path='/verify' component = {Verify} />
+          <Route path='/' component = {Home} />
         </Switch>
       </Router>
     </Provider>
