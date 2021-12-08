@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import { Provider } from 'react-redux'
 import { applyMiddleware, compose, createStore } from "redux";
-import Login from "./pages/Login";
+import Login from "./pages/Login/Login";
 import Register from "./pages/Register";
 import reducers from "./redux/reducers";
 import ReduxThunk from 'redux-thunk'
