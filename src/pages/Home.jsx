@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { doLogout } from '../redux/actions/auth';
 
 const Home = ({history, location}) => {
+  const userLogin = useSelector((state) => state.auth);
+  const { isLogin } = userLogin;
+  useEffect(() => {
+    if(!isLogin){
+      history.replace('/login')
+    }
+  }, [])
     const dispatch = useDispatch()
     const _doLogout = () => {
         dispatch(doLogout((err, res) => {
@@ -20,9 +27,6 @@ const Home = ({history, location}) => {
       <h1>
         Ini halaman Home
       </h1>
-      <Button variant="primary" onClick={ _doLogout }>
-          Logout
-      </Button>
     </div>
   );
 }
