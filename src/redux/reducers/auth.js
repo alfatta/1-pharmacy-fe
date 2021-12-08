@@ -1,7 +1,7 @@
 const initValue = {
     isLogin: JSON.parse(localStorage.getItem('isLogin')) || false,
     token: localStorage.getItem('token') || null,
-    loggedUser: JSON.parse(localStorage.getItem('loggedUser')) || {},
+    loggedUser: JSON.parse(localStorage.getItem('loggedUser')) || null,
     role: JSON.parse(localStorage.getItem('role')) || {},
   }
   
