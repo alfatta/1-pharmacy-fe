@@ -13,6 +13,8 @@ import ReduxThunk from 'redux-thunk'
 import Verify from "./pages/Verify";
 import Home from "./pages/Home";
 import Navigation from "./components/Navigation/Navigation";
+import FooterArea from "./components/Footer/FooterArea";
+import FooterBottom from "./components/Footer/FooterBottom";
 
 const composeEnhancers =
   typeof window === 'object' &&
@@ -34,6 +36,8 @@ function App() {
           <Route path='/verify' component = {Verify} />
           <Route path='/' component = {Home} />
         </Switch>
+        <FooterArea></FooterArea>
+        <FooterBottom></FooterBottom>
       </Router>
     </Provider>
   );
