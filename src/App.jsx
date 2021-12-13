@@ -15,6 +15,7 @@ import Home from "./pages/Home";
 import Navigation from "./components/Navigation/Navigation";
 import FooterArea from "./components/Footer/FooterArea";
 import FooterBottom from "./components/Footer/FooterBottom";
+import Shop from "./pages/Shop/Shop";
 
 const composeEnhancers =
   typeof window === 'object' &&
@@ -34,6 +35,7 @@ function App() {
           <Route path='/register' component = {Register} />
           <Route path='/login' component = {Login} />
           <Route path='/verify' component = {Verify} />
+          <Route path='/shop' component={Shop}/>
           <Route path='/' component = {Home} />
         </Switch>
         <FooterArea></FooterArea>
