@@ -18,12 +18,25 @@ export const clearProduct = () => ({
   type: 'CLEAR_PRODUCT'
 })
 
-export const getProduct = (cb = () => {}) => {
+export const setPage = (page,previousPage,nextPage) => ({
+  type: 'SET_PAGE',
+  payload : {
+    page,previousPage,nextPage
+  }
+})
+
+export const getProduct = (page = 1, cb = () => {}) => {
   return (dispatch) => {
-    Axios.get('/api/tes/product')
+    Axios.get('/api/tes/product', {
+      params : {
+        page,
+        perPage : 20,
+      }
+    })
       .then((res) => {
-        dispatch(setProduct(res.data))
-        cb(null, res.data)
+        dispatch(setProduct(res.data.rows))
+        dispatch(setPage(page, res.data.previousPage, res.data.nextPage))
+        cb(null, res.data.rows)
       })
       .catch((err) => {
         if (err.response) {

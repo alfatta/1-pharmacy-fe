@@ -29,7 +29,7 @@ import SmallCard from "../../components/SmallCard/SmallCard.js";
 import { Card, Col, Collapse, Row } from "react-bootstrap";
 
 
-const Shop = () => {
+const Shop = ({history, location}) => {
 
   const dispatch = useDispatch()
 
@@ -41,7 +41,9 @@ const Shop = () => {
     mobile = false;
   }
   useEffect(() => {
-    dispatch(getProduct())
+    const query = new URLSearchParams(location.search)
+    const page = query.get('page') || 1
+    dispatch(getProduct(page))
     dispatch(getCategory())
   }, [])
   const productAll = useSelector((state) => state.products);

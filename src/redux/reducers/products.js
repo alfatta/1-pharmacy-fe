@@ -1,4 +1,7 @@
 const initValue = {
+    previousPage : null,
+    nextPage : null,
+    page : 1,
     productList: []
 }
 
@@ -9,6 +12,9 @@ const products = (state = initValue, { type, payload }) => {
 
         case 'CLEAR_PRODUCT':
             return initValue
+        
+        case 'SET_PAGE':
+            return {...state,...payload}
         default:
             return state
     }
