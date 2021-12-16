@@ -26,7 +26,7 @@ import { getProduct } from "../../redux/actions/products.js";
 import { getCategory } from "../../redux/actions/category.js";
 import CategoryListItem from "../../components/CategoryList.js";
 import SmallCard from "../../components/SmallCard/SmallCard.js";
-import { Card, Col, Collapse, Row } from "react-bootstrap";
+import { Card, Col, Collapse, Row, Pagination } from "react-bootstrap";
 
 
 const Shop = ({history, location}) => {
@@ -47,8 +47,7 @@ const Shop = ({history, location}) => {
     dispatch(getCategory())
   }, [])
   const productAll = useSelector((state) => state.products);
-  const { productList } = productAll;
-
+  const { productList, previousPage , nextPage, page} = productAll;
   const categoryAll = useSelector((state) => state.category);
   const { categoryList } = categoryAll;
 
@@ -109,6 +108,11 @@ const Shop = ({history, location}) => {
             </SearchAndFilters>
             <MobileProducts>
               {renderProduct()}
+            <Pagination>
+              <Pagination.Prev disabled={!previousPage} href={'/shop?page=' + previousPage} />
+              <Pagination.Item disabled>{page}</Pagination.Item>
+              <Pagination.Next disabled={!nextPage} href={'/shop?page=' + nextPage} />
+            </Pagination>
               <PageNav>
                 <Stack spacing={2}>
                 </Stack>
@@ -145,6 +149,11 @@ const Shop = ({history, location}) => {
                 <ProductsContainer>
                   <Row>
                   {renderProduct()}
+                    <Pagination>
+                      <Pagination.Prev disabled = {!previousPage} href = {'/shop?page=' + previousPage}/>
+                      <Pagination.Item disabled>{page}</Pagination.Item>
+                      <Pagination.Next disabled = {!nextPage} href = {'/shop?page=' + nextPage}/>
+                    </Pagination>
                   </Row>
                   <PageNav>
                     <Stack spacing={2}>
