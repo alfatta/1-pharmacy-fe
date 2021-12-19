@@ -1,6 +1,6 @@
 import { Row, Col, ListGroup, Image, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { addToCart, removeFromCart } from "../../../redux/actions/cart";
+import { addToCart, removeFromCart, updateCart } from "../../../redux/actions/cart";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 const SubProduct = ({ item }) => {
@@ -16,6 +16,7 @@ const SubProduct = ({ item }) => {
       setSubQty(1);
     } else {
       setSubQty(e.target.value);
+      dispatch(updateCart(item, e.target.value))
     }
   };
   return (
