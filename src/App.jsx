@@ -12,6 +12,7 @@ import reducers from "./redux/reducers";
 import ReduxThunk from 'redux-thunk'
 import Verify from "./pages/Verify";
 import Home from "./pages/Home";
+import ProductScreen from "./pages/ProductScreen/ProductScreen";
 import Navigation from "./components/Navigation/Navigation";
 import FooterArea from "./components/Footer/FooterArea";
 import FooterBottom from "./components/Footer/FooterBottom";
@@ -35,6 +36,7 @@ function App() {
           <Route path='/register' component = {Register} />
           <Route path='/login' component = {Login} />
           <Route path='/verify' component = {Verify} />
+          <Route path= '/shop/:id' component={ProductScreen}/>
           <Route path='/shop' component={Shop}/>
           <Route path='/' component = {Home} />
         </Switch>
