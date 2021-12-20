@@ -1,16 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Row, Col, ListGroup, Button, Card, Container } from "react-bootstrap";
 import SubProduct from "./SubProduct/SubProduct";
 import classes from "./CartScreen.module.css";
+import { checkout } from "../../redux/actions/cart";
 
 const CartScreen = ({ match, location, history }) => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  const dispatch = useDispatch()
 
   const checkoutHandler = () => {
-    history.push("/login?redirect=shipping");
+    dispatch(checkout(() => {
+      history.push("/shop");
+    }))
   };
   return (
     <div className={classes.wrapper}>

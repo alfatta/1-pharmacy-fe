@@ -14,7 +14,7 @@ export const addToCart = (product, qty) => ({
   payload: {...product, qty : parseInt(qty)}
 })
 
-export const clearCategory = () => ({
+export const clearCart = () => ({
   type: 'CLEAR_CART'
 })
 
@@ -28,3 +28,24 @@ export const removeFromCart = (product) => ({
   payload: product
 })
 
+export const checkout = ( cb = () => {}) => {
+  return (dispatch, getState) => {
+    const {cart : {cartItems}} = getState()
+    Axios.post('/api/tes/transaction',
+    {
+      items : cartItems
+   })
+      .then((res) => {
+        
+        dispatch(clearCart())
+        cb(null, res.data)
+      })
+      .catch((err) => {
+        if (err.response) {
+          cb(err.response.data)
+        } else {
+          cb(err.message)
+        }
+      })
+  }
+}
