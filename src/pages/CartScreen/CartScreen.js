@@ -13,7 +13,7 @@ const CartScreen = ({ match, location, history }) => {
 
   const checkoutHandler = () => {
     dispatch(checkout(() => {
-      history.push("/shop");
+      history.push("/userProfile");
     }))
   };
   return (
