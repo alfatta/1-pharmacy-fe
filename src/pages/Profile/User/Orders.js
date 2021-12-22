@@ -37,9 +37,7 @@ const Orders = () => {
                 <th>ID</th>
                 <th>DATE</th>
                 <th>TOTAL</th>
-                <th>PAID</th>
-                <th>DELIVERED</th>
-                <th></th>
+                <th>STATUS</th>
               </tr>
             </thead>
             <tbody>
@@ -49,23 +47,13 @@ const Orders = () => {
                   <td>{order.tanggalTransaksi}</td>
                   <td>Rp.{order.hargaKeseluruhan}</td>
                   <td>
-                    {/* {order.isPaid ? (
-                      order.paidAt.substring(0, 10)
-                    ) : (
-                      <i className="fas fa-times" style={{ color: "red" }}></i>
-                    )} */}
-                  </td>
-                  <td>
-                    {/* {order.isDelivered ? (
-                      order.deliveredAt.substring(0, 10)
-                    ) : (
-                      <i className="fas fa-times" style={{ color: "red" }}></i>
-                    )} */}
-                  </td>
-                  <td>
-                    {/* <LinkContainer to={`/order/${order._id}`}>
-                      <Button className="btn-sm">Details</Button>
-                    </LinkContainer> */}
+                    {order.statusTransaksi == 1 ? (
+                      'Created'
+                    ) : order.statusTransaksi == 2 ? (
+                      'Paid'
+                    ) : order.statusTransaksi ==3 ? (
+                      'Payment Accepted'
+                      ): 'Delivered'}
                   </td>
                 </tr>
               ))}
