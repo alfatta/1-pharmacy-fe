@@ -18,6 +18,7 @@ import FooterArea from "./components/Footer/FooterArea";
 import FooterBottom from "./components/Footer/FooterBottom";
 import Shop from "./pages/Shop/Shop";
 import CartScreen from "./pages/CartScreen/CartScreen"
+import UserProfile from "./pages/Profile/User/UserProfile";
 
 const composeEnhancers =
   typeof window === 'object' &&
@@ -40,6 +41,7 @@ function App() {
           <Route path= '/shop/:id' component={ProductScreen}/>
           <Route path='/shop' component={Shop}/>
           <Route path = '/cart' component ={CartScreen} />
+          <Route path = '/userProfile' component={UserProfile}/>
           <Route path='/' component = {Home} />
         </Switch>
         <FooterArea></FooterArea>
