@@ -53,3 +53,20 @@ export const deleteProduct = (id, cb = () => {}) => {
       })
   }
 }
+
+
+export const createProduct = (data, cb = () => {}) => {
+  return (dispatch) => {
+    Axios.post('/api/tes/product/', data)
+      .then((res) => {
+        cb(null, res.data)
+      })
+      .catch((err) => {
+        if (err.response) {
+          cb(err.response.data)
+        } else {
+          cb(err.message)
+        }
+      })
+  }
+}
