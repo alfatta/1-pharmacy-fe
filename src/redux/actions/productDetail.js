@@ -70,3 +70,19 @@ export const createProduct = (data, cb = () => {}) => {
       })
   }
 }
+
+export const editProduct = (id,data, cb = () => {}) => {
+  return (dispatch) => {
+    Axios.patch('/api/tes/product/' + id, data)
+      .then((res) => {
+        cb(null, res.data)
+      })
+      .catch((err) => {
+        if (err.response) {
+          cb(err.response.data)
+        } else {
+          cb(err.message)
+        }
+      })
+  }
+}

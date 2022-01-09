@@ -79,11 +79,11 @@ const ProductListScreen = () => {
                     <td>Rp.{product.hargaObat}</td>
                     <td>{product.kategori.namaKategori}</td>
                     <td>
-                      {/* <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                      <Link to={`/admin/product/${product.idObat}/edit`}>
                         <Button variant="light" className="btn-sm">
                           <i className="fas fa-edit"></i>
                         </Button>
-                      </LinkContainer> */}
+                      </Link>
                       <Button
                         variant="danger"
                         className="btn-sm"

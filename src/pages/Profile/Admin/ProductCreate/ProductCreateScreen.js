@@ -57,7 +57,7 @@ const ProductCreateScreen = ({ match, history }) => {
           "Content-Type": "multipart/form-data",
         },
       };
-      const { data } = await axios.post("/api/upload", formData, config);
+      const { data } = await axios.post("/api/tes/upload", formData, config);
 
       setGambarObat(data);
       setUploading(false);
