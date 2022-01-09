@@ -1,10 +1,11 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Container, Form, Button, Col, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../../../components/Message";
 import Loader from "../../../../components/Loader";
+import { getCategory } from "../../../../redux/actions/category";
 import { createProduct } from "../../../../redux/actions/productDetail";
 import DropNotif from "../../../../components/Modal/Modal";
 import MarkdownEditor from "../../../../components/TextEditor/MarkdownEditor";
@@ -19,6 +20,13 @@ const ProductCreateScreen = ({ match, history }) => {
   const [uploading, setUploading] = useState(false);
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCategory())
+
+  }, [dispatch])
+
+  const categoryAll = useSelector((state) => state.category);
+  const { categoryList } = categoryAll;
 
 
   const submitHandler = (e) => {
@@ -31,6 +39,8 @@ const ProductCreateScreen = ({ match, history }) => {
         idKategori,
         infoObat,
         dosisObat,
+      }, (error,result) =>{
+        history.replace('/userProfile?menu=6')
       })
     );
   };
@@ -126,13 +136,9 @@ const ProductCreateScreen = ({ match, history }) => {
                 onChange={(e) => setIdKategori(e.target.value)}
               >
                 <option value=""></option>
-                <option value="Books">Books</option>
-                <option value="Games">Games</option>
-                <option value="Electronics">Electronics</option>
-                <option value="Men">Men Fashions</option>
-                <option value="Women">Women Fashions</option>
-                <option value="Baby">Baby</option>
-                <option value="Automobile">Automobile</option>
+                {categoryList.map((item) =>(
+                  <option value= {item.idKategori}>{item.namaKategori}</option>
+                ))}
               </Form.Control>
             </Form.Group>
 
