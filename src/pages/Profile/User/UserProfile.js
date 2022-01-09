@@ -7,44 +7,45 @@ import { useSelector } from "react-redux";
 import { Container } from "react-bootstrap";
 import classes from "../../ProductScreen/ProductScreen.module.css";
 // import UserListScreen from "../Admin/UserListScreen";
-// import ProductListScreen from "../Admin/ProductList/ProductListScreen";
+import ProductListScreen from "../Admin/ProductList/ProductListScreen";
 // import OrderListScreen from "../Admin/OrderList/OrderListScreen";
 // import ManageRequestScreen from "../Admin/ManageRequest/ManageRequestScreen";
 
-const UserProfile = ({ history }) => {
-  // const userLogin = useSelector((state) => state.userLogin);
-  // const { userInfo } = userLogin;
+const UserProfile = ({ history, location }) => {
+  const userLogin = useSelector((state) => state.auth);
+  const { isLogin,loggedUser } = userLogin;
+  const query = new URLSearchParams(location.search)
 
-  // useEffect(() => {
-  //   if (!userInfo) {
-  //     history.push("/login");
-  //   }
-  // }, [history, userInfo]);
+  useEffect(() => {
+    if (!isLogin) {
+      history.push("/login");
+    }
+  }, [history, isLogin]);
 
-  const [selection, setSelection] = useState("1");
+  const [selection, setSelection] = useState(query.get('menu') || "3");
 
   const changeSelection = (e) => {
     setSelection(e.target.getAttribute("data-selection"));
   };
 
   let selectionShow;
-  // if (selection === "1") {
-  //   selectionShow = <Details></Details>;
-  // } else if (selection === "2") {
-  //   selectionShow = <Addresses />;
-  // } else if (selection === "3") {
+  if (selection === "1") {
+    // selectionShow = <Details></Details>;
+  } else if (selection === "2") {
+    // selectionShow = <Addresses />;
+  } else if (selection === "3") {
     selectionShow = <Orders />;
-  // } else if (selection === "4") {
-  //   selectionShow = <Request />;
-  // } else if (selection === "5") {
-  //   selectionShow = <UserListScreen />;
-  // } else if (selection === "6") {
-  //   selectionShow = <ProductListScreen />;
-  // } else if (selection === "7") {
-  //   selectionShow = <OrderListScreen />;
-  // } else if (selection === "8") {
-  //   selectionShow = <ManageRequestScreen />;
-  // }
+  } else if (selection === "4") {
+    // selectionShow = <Request />;
+  } else if (selection === "5") {
+    // selectionShow = <UserListScreen />;
+  } else if (selection === "6") {
+    selectionShow = <ProductListScreen />;
+  } else if (selection === "7") {
+    // selectionShow = <OrderListScreen />;
+  } else if (selection === "8") {
+    // selectionShow = <ManageRequestScreen />;
+  }
 
   return (
     <Container>
@@ -83,8 +84,8 @@ const UserProfile = ({ history }) => {
             >
               User Requests
             </li>
-          )}
-          {userInfo && userInfo.isAdmin && (
+          )} */}
+          {/* {userInfo && userInfo.isAdmin && (
             <li
               className={classes.navItem}
               data-selection="5"
@@ -92,8 +93,8 @@ const UserProfile = ({ history }) => {
             >
               Manage Users
             </li>
-          )}
-          {userInfo && (userInfo.isAdmin || userInfo.isSeller) && (
+          )} */}
+          {loggedUser && (loggedUser.isAdmin) && (
             <li
               className={classes.navItem}
               data-selection="6"
@@ -102,7 +103,7 @@ const UserProfile = ({ history }) => {
               Manage Products
             </li>
           )}
-          {userInfo && userInfo.isAdmin && (
+          {/* {userInfo && userInfo.isAdmin && (
             <li
               className={classes.navItem}
               data-selection="7"
@@ -110,8 +111,8 @@ const UserProfile = ({ history }) => {
             >
               Manage Orders
             </li>
-          )}
-          {userInfo && userInfo.isAdmin && (
+          )} */}
+          {/* {userInfo && userInfo.isAdmin && (
             <li
               className={classes.navItem}
               data-selection="8"
