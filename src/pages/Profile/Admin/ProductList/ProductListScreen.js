@@ -5,9 +5,8 @@ import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../../../components/Message";
 import Loader from "../../../../components/Loader";
-import {
-  getProduct,
-} from "../../../../redux/actions/products";
+import {getProduct} from "../../../../redux/actions/products";
+import {deleteProduct} from "../../../../redux/actions/productDetail";
 // import { deleteProduct } from "../../../../actions/productActions";
 import DropNotif from "../../../../components/Modal/Modal";
 // import { PRODUCT_DELETE_RESET } from "../../../../constants/productConstants";
@@ -36,11 +35,13 @@ const ProductListScreen = () => {
     dispatch(getProduct(page));
   }, [dispatch, page, location]);
 
-  // const deleteHandler = (id) => {
-  //   if (window.confirm("Are you sure?")) {
-  //     dispatch(deleteProduct(id));
-  //   }
-  // };
+  const deleteHandler = (id) => {
+    if (window.confirm("Are you sure?")) {
+      dispatch(deleteProduct(id,(error,result) =>{
+        dispatch(getProduct(page))
+      }));
+    }
+  };
   // const pageHandler = (e, value) => {
   //   setPage(value);
   // };
@@ -82,14 +83,14 @@ const ProductListScreen = () => {
                         <Button variant="light" className="btn-sm">
                           <i className="fas fa-edit"></i>
                         </Button>
-                      </LinkContainer>
+                      </LinkContainer> */}
                       <Button
                         variant="danger"
                         className="btn-sm"
-                        onClick={() => deleteHandler(product._id)}
+                        onClick={() => deleteHandler(product.idObat)}
                       >
                         <i className="fas fa-trash"></i>
-                      </Button> */}
+                      </Button>
                     </td>
                   </tr>
                 ))}

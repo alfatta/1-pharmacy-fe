@@ -36,3 +36,20 @@ export const getProductDetail = (id, cb = () => {}) => {
       })
   }
 }
+
+export const deleteProduct = (id, cb = () => {}) => {
+  return (dispatch) => {
+    Axios.delete('/api/tes/product/' + id, {
+    })
+      .then((res) => {
+        cb(null, res.data)
+      })
+      .catch((err) => {
+        if (err.response) {
+          cb(err.response.data)
+        } else {
+          cb(err.message)
+        }
+      })
+  }
+}
