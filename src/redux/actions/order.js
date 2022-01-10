@@ -39,3 +39,27 @@ export const getMyOrder = (cb = () => {}) => {
       })
   }
 }
+
+
+
+export const getAllOrder = (cb = () => {}) => {
+  return (dispatch) => {
+    Axios.get('/api/tes/transaction',{
+        params : {
+            page : 1,
+            perPage : 1000
+        }
+    })
+      .then((res) => {
+        dispatch(setOrder(res.data.rows))
+        cb(null, res.data.rows)
+      })
+      .catch((err) => {
+        if (err.response) {
+          cb(err.response.data)
+        } else {
+          cb(err.message)
+        }
+      })
+  }
+}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 // import Details from "./Details";
 // import Addresses from "./Addresses";
 import Orders from "./Orders";
+import AllOrder from "./AllOrder";
 import { useSelector } from "react-redux";
 // import Request from "./Request";
 import { Container } from "react-bootstrap";
@@ -45,6 +46,8 @@ const UserProfile = ({ history, location }) => {
     // selectionShow = <OrderListScreen />;
   } else if (selection === "8") {
     // selectionShow = <ManageRequestScreen />;
+  } else if (selection === "9"){
+    selectionShow = <AllOrder />
   }
 
   return (
@@ -76,6 +79,17 @@ const UserProfile = ({ history, location }) => {
               User Orders
             </li>
           {/* )} */}
+
+        {loggedUser && loggedUser.isAdmin && (
+          <li
+              className={classes.navItem}
+              data-selection="9"
+              onClick={changeSelection}
+            >
+              All Orders
+            </li>
+          )}
+          
           {/* {userInfo && !userInfo.isAdmin && (
             <li
               className={classes.navItem}
