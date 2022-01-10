@@ -63,3 +63,21 @@ export const getAllOrder = (cb = () => {}) => {
       })
   }
 }
+
+export const updateOrderStatus = (id,status,cb = () => {}) => {
+  return (dispatch) => {
+    Axios.patch('/api/tes/transaction/' + id,{
+      statusTransaksi : status
+    })
+      .then((res) => {
+        cb(null, res.data)
+      })
+      .catch((err) => {
+        if (err.response) {
+          cb(err.response.data)
+        } else {
+          cb(err.message)
+        }
+      })
+  }
+}

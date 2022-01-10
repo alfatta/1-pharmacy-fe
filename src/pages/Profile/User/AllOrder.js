@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import Message from "../../../components/Message";
 import { useSelector, useDispatch } from "react-redux";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button,Badge } from "react-bootstrap";
 // import { LinkContainer } from "react-router-bootstrap";
 import Loader from "../../../components/Loader";
-import { getAllOrder } from "../../../redux/actions/order";
+import { getAllOrder, updateOrderStatus } from "../../../redux/actions/order";
 
 const AllOrder = () => {
   const dispatch = useDispatch();
@@ -14,6 +14,12 @@ const AllOrder = () => {
   useEffect(() => {
     dispatch(getAllOrder());
   }, [dispatch]);
+
+  const updateStatus = (id, status) => {
+    dispatch(updateOrderStatus(id,status,() =>{
+      dispatch(getAllOrder())
+    }))
+  }
 
   let order;
   if (orderList) {
@@ -39,6 +45,7 @@ const AllOrder = () => {
                 <th>USER</th>
                 <th>TOTAL</th>
                 <th>STATUS</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -56,6 +63,15 @@ const AllOrder = () => {
                     ) : order.statusTransaksi ==3 ? (
                       'Payment Accepted'
                       ): 'Delivered'}
+                  </td>
+                  <td>
+                  {order.statusTransaksi == 1 ? 
+                    <Badge variant="primary" onClick={()=>updateStatus(order.idTransaksi, 2)}>Set Paid</Badge>
+                    : order.statusTransaksi == 2 ? (
+                      <Badge variant="primary" onClick={()=>updateStatus(order.idTransaksi, 3)}>Set Payment Accepted</Badge>
+                    ) : order.statusTransaksi ==3 ? (
+                      <Badge variant="primary" onClick={()=>updateStatus(order.idTransaksi, 4)}>Set Delivered</Badge>
+                      ): ''}
                   </td>
                 </tr>
               ))}
