@@ -45,7 +45,7 @@ const Orders = () => {
                 <tr key={order.idTransaksi}>
                   <td>{order.idTransaksi}</td>
                   <td>{order.tanggalTransaksi}</td>
-                  <td>Rp.{order.hargaKeseluruhan}</td>
+                  <td>Rp.{new Intl.NumberFormat().format(order.hargaKeseluruhan)}</td>
                   <td>
                     {order.statusTransaksi == 1 ? (
                       'Created'

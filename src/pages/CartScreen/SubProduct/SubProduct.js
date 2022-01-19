@@ -29,7 +29,7 @@ const SubProduct = ({ item }) => {
           <Col md={3}>
             <Link to={`/shop/${item.idObat}`}>{item.namaObat}</Link>
           </Col>
-          <Col md={2}>Rp.{item.hargaObat}</Col>
+          <Col md={2}>Rp.{new Intl.NumberFormat().format(item.hargaObat)}</Col>
           <Col md={2}>
             <Form.Control
               type="number"

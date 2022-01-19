@@ -22,7 +22,7 @@ const ProductSection = ({ product }) => {
       <img className={classes.productImage} src={product.gambarObat} alt="Product" />
       <div className={classes.content}>
         <h3 className={classes.productName}>{product.namaObat}</h3>
-        <h2 className={classes.productPrice}>Rp.{product.hargaObat}</h2>
+        <h2 className={classes.productPrice}>Rp.{new Intl.NumberFormat().format(product.hargaObat)}</h2>
         <ul className={classes.list}>
           <li>
             <a class="active" href="/">

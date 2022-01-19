@@ -76,7 +76,7 @@ const ProductListScreen = () => {
                   <tr key={product.idObat}>
                     <td>{product.idObat}</td>
                     <td>{product.namaObat}</td>
-                    <td>Rp.{product.hargaObat}</td>
+                    <td>Rp.{new Intl.NumberFormat().format(product.hargaObat)}</td>
                     <td>{product.kategori.namaKategori}</td>
                     <td>
                       <Link to={`/admin/product/${product.idObat}/edit`}>

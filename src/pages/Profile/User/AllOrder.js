@@ -54,7 +54,7 @@ const AllOrder = () => {
                   <td>{order.idTransaksi}</td>
                   <td>{order.tanggalTransaksi}</td>
                   <td>{order.user.namaUser}</td>
-                  <td>Rp.{order.hargaKeseluruhan}</td>
+                  <td>Rp.{new Intl.NumberFormat().format(order.hargaKeseluruhan)}</td>
                   <td>
                     {order.statusTransaksi == 1 ? (
                       'Created'
